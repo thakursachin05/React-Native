@@ -17,26 +17,50 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{name}</Text>
-      <Text style={styles.text}>This {session.title} and number is {session.number} </Text>
-      <Text style={styles.text}>{current ? 'current-session' : 'next-session'}</Text>
-      <View style={styles.button}>
-        <Button title='Update State' onPress={onClickHandler}></Button>
+      <View style={styles.view1}>
+        <Text style={styles.text}>1</Text>
       </View>
-      <StatusBar style="auto" />
+      <View style={styles.view2}>
+        <Text style={styles.text}>2</Text>
+      </View>
+      <View style={styles.view3}>
+        <Text style={styles.text}>3</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#0f0f',
-    alignItems: 'center',
+    flex:1,
+    flexDirection: 'column',
+    backgroundColor: '#f000ff',
+    alignItems: 'stretch',   // align items always workd in cross axis to the flex direction provided 
     justifyContent: 'center',
-    borderWidth: 10,
-    borderColor: '#493fff',
-    borderRadius: 10,
+  },
+  view1: {
+    // width: 100,
+    // height: 100,
+    flex: 2,  // flex 1 ka mtlab saara free space acquire krlo expect the sapce to the elements which are there
+    backgroundColor: '#00ffff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  view2: {
+    // width: 100,
+    // height: 100,
+    flex:2,
+    backgroundColor: '#00ff00',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  view3: {
+    // width: 100,
+    // height: 100,
+    flex:2,
+    backgroundColor: '#1100ff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   text: {
     color: '#ffffff',
@@ -45,8 +69,5 @@ const styles = StyleSheet.create({
     margin: 10,
     textTransform: 'uppercase',
   },
-  button: {
-    width: 200,
-    height: 60,
-  }
+
 });
