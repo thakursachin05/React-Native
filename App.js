@@ -1,32 +1,40 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, Linking, StyleSheet, Text, View } from 'react-native';
-import React, {useState} from 'react';
+import { Button, Linking, RefreshControl, ScrollViewBase, StyleSheet, Text, View } from 'react-native';
+import React, {useState, useSyncExternalStore} from 'react';
 
 export default function App() {
-  const [name, setName ] = useState('Ram');
-  const [session, setSession] = useState({number:6,title: 'state'});
-  const [current, setCurrent] = useState(true);
-  const onClickHandler = () => {
-    if(name == 'Ram')
-      setName('Jai Shree ram');
-    else {
-      setName('Ram');
+    const [Items, setItems] = useState([
+      {key:1,item: 'Item 1'},
+      {key:2,item: 'Item 2'},
+      {key:3,item: 'Item 3'},
+      {key:4,item: 'Item 4'},
+      {key:5,item: 'Item 5'},
+      {key:6,item: 'Item 6'},
+      {key:7,item: 'Item 7'},
+      {key:8,item: 'Item 8'}
+    ]);
+    const [Refreshing , setRefreshing] = useState(false);
+    const onRefresh = () => {
+      setRefreshing(true);
+      setItems([...Items , {key:69, item:"Item 69"}]);
+      setRefreshing(false);
     }
-    setSession({number : session.number+1, title: 'style'});
-    setCurrent(false);
-  }
   return (
-    <View style={styles.container}>
-      <View style={styles.view1}>
-        <Text style={styles.text}>1</Text>
-      </View>
-      <View style={styles.view2}>
-        <Text style={styles.text}>2</Text>
-      </View>
-      <View style={styles.view3}>
-        <Text style={styles.text}>3</Text>
-      </View>
-    </View>
+    // <View style={styles.container}>
+      <ScrollView style={styles.container} refreshContro={
+        <RefreshControl refreshing = {Refreshing} onRefresh = {onRefresh} color={['#ff00ff']}/>
+      }>
+      {
+        Items.map((object) => {
+          return(
+            <View style={styles.item} key={object.key}>
+              <Text style={styles.text}>{object.item}</Text>
+            </View>
+          )
+        })
+      }
+      </ScrollView>
+    // </View>
   );
 }
 
@@ -38,29 +46,11 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',   // align items always workd in cross axis to the flex direction provided 
     justifyContent: 'center',
   },
-  view1: {
-    // width: 100,
-    // height: 100,
-    flex: 2,  // flex 1 ka mtlab saara free space acquire krlo expect the sapce to the elements which are there
-    backgroundColor: '#00ffff',
+  item : {
+    margin: 30,
+    backgroundColor: '#4ae1fa',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-  view2: {
-    // width: 100,
-    // height: 100,
-    flex:2,
-    backgroundColor: '#00ff00',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  view3: {
-    // width: 100,
-    // height: 100,
-    flex:2,
-    backgroundColor: '#1100ff',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   text: {
     color: '#ffffff',
