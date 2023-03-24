@@ -14,13 +14,14 @@ export default function App() {
     { name: 'Item 8' }
   ]);
   const [Refreshing, setRefreshing] = useState(false);
+  
   const onRefresh = () => {
     setRefreshing(true);
     setItems([...Items, { key: 69, item: "Item 69" }]);
     setRefreshing(false);
   }
 
-  const DATA = [
+  const [DATA,setDATA] = useState([
     {
       title: 'Title 1',
       data: ['Item 1-1','Item 1-2', 'Item 1-3']
@@ -37,7 +38,12 @@ export default function App() {
       title: 'Title 4',
       data: ['Item 4-1']
     }
-  ]
+  ]);
+  let count = parseInt(DATA.length);
+  const onPress = () => {
+    setDATA([...DATA,{title: 'Jai Shree Ram ' + String(count),data: ['Jai Shree Ram' + String(count)]}])
+  }
+  
   return (
     // <FlatList
     //   // horizontal
@@ -59,7 +65,7 @@ export default function App() {
     //       />
     //     }
     //   />
-    // <View>
+    <View style={styles.container}>
 
       <SectionList 
         keyExtractor={(item, index) => index.toString()}
@@ -76,8 +82,12 @@ export default function App() {
         )}
         
         />
-          /* <Button>Click</Button>
-        </View> */
+        <Button
+          title='Add New'
+          onPress={onPress}
+
+        />
+        </View> 
 
   );
 }
