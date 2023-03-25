@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Alert, Button, Modal, FlatList, Linking, Pressable, RefreshControl, ScrollView, SectionList, StyleSheet, Text, TextInput, ToastAndroid, Touchable, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Alert, Button, Image, ImageBackground, Modal, FlatList, Linking, Pressable, RefreshControl, ScrollView, SectionList, StyleSheet, Text, TextInput, ToastAndroid, Touchable, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import React, { useState, useSyncExternalStore } from 'react';
 
 export default function App() {
@@ -16,7 +16,10 @@ export default function App() {
   }
 
   return (
-    <View style={styles.body}>
+    <ImageBackground 
+      style={styles.body}
+      source={{uri: 'https://cdn.pixabay.com/photo/2023/03/14/12/41/wheat-7852286_1280.jpg'}}
+      >
       <Modal
       visible={showWarning}
       onRequestClose={() => {
@@ -73,13 +76,26 @@ export default function App() {
 
 
       {submitted ?
+      <View style={styles.body}>
         <Text style={styles.text}>
           You are registered {name}
         </Text>
+        <Image 
+          style={styles.image}
+          source={require('./assets/done.png')} 
+          resizeMode='stretch'
+          />
+      </View>
         :
-        null
+        <Image 
+          style={styles.image}
+          // source={require('./assets/error.png')} 
+          source={{ uri:'https://cdn.pixabay.com/photo/2018/01/04/15/51/404-error-3060993__480.png' }}
+          resizeMode='stretch'
+          // blurRadius={5}
+          />
       }
-    </View>
+    </ImageBackground>
 
   );
 }
@@ -143,6 +159,11 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     margin: 0,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 10,
   }
 
 });
