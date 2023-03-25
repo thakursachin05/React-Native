@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { Alert, Button, Image, ImageBackground, Modal, FlatList, Linking, Pressable, RefreshControl, ScrollView, SectionList, StyleSheet, Text, TextInput, ToastAndroid, Touchable, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import React, { useState, useSyncExternalStore } from 'react';
+import CustomButton from './CustomButtons';
+import Header from './Header';
 
 export default function App() {
   const [name, setName] = useState('');
@@ -20,6 +22,7 @@ export default function App() {
       style={styles.body}
       source={{uri: 'https://cdn.pixabay.com/photo/2023/03/14/12/41/wheat-7852286_1280.jpg'}}
       >
+        <Header />
       <Modal
       visible={showWarning}
       onRequestClose={() => {
@@ -56,25 +59,17 @@ export default function App() {
         placeholder='e.g. Jai Shree Ram'
         onChangeText={(value) => setName(value)}
       />
-
-      <Pressable
-        onPress={onPressHandler}
-        // onLongPress={onPressHandler}
-        // delayLongPress = {2000}
-        // hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
-        // disabled={submitted}
-        // android_ripple={{color: '#00f'}}
-        style={({ pressed }) => [
-          { backgroundColor: pressed ? '#ddfdff' : '#00ff00' },
-          styles.Button
-        ]}
-      >
-        <Text style={styles.text}>
-          {submitted ? 'Clear' : 'Submit'}
-        </Text>
-      </Pressable>
-
-
+      <CustomButton 
+       onPressFunction={onPressHandler}
+       title={submitted? 'Clear' : 'Submit'}
+       color={'#00ff00'}
+      />
+       <CustomButton 
+       onPressFunction={onPressHandler}
+       title={'Test'}
+       color={'#0ff'}
+       style={{margin:10}}
+      />
       {submitted ?
       <View style={styles.body}>
         <Text style={styles.text}>
@@ -82,7 +77,7 @@ export default function App() {
         </Text>
         <Image 
           style={styles.image}
-          source={require('./assets/done.png')} 
+          source={require('../assets/done.png')} 
           resizeMode='stretch'
           />
       </View>
@@ -95,6 +90,8 @@ export default function App() {
           // blurRadius={5}
           />
       }
+
+
     </ImageBackground>
 
   );
