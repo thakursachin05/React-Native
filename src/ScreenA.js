@@ -10,7 +10,8 @@ import {
 
 export default function ScreenA({ navigation }){
     const onPressHandler = () => {
-      navigation.navigate('Screen_B');
+    //   navigation.navigate('Screen_B');
+    navigation.toggleDrawer();
       // navigation.replace('Screen_B');
     }
     return(
@@ -23,7 +24,7 @@ export default function ScreenA({ navigation }){
           style={({pressed}) => ({ backgroundColor: pressed ? '#ddd' : '#00ff00'})}
         >
           <Text style={styles.text}>
-            Go to screen B
+                Toggle Drawer
           </Text>
         </Pressable>
       </View>
