@@ -64,8 +64,9 @@ function App() {
         color= { focused ? '#0080ff' : '#999999' }
         />
       )
-      
-      }}/>
+    }}
+    initialParams = {{ItemName: "Item from Drawer" , ItemId: 12}}
+      />
   </Drawer.Navigator>
 </NavigationContainer>
  )
